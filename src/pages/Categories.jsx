@@ -1,11 +1,11 @@
 import React from "react";
+import GetCategories from "../components/GetCatergories";
 
 export default function Categories() {
 	return (
-		<div>
-			<h1>Why isnt this working</h1>
-			{console.log("hello")}
-			<p>hi</p>Hello
+		<div className="body">
+			<h1>Categories</h1>
+			<GetCategories />
 		</div>
 	);
 }

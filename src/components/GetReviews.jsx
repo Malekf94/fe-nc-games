@@ -11,7 +11,7 @@ export default function GetReviews() {
 	}, []);
 
 	return (
-		<div className={styles.body}>
+		<div className="body">
 			<ul>
 				{reviews.map((review) => {
 					return (

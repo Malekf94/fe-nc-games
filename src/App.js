@@ -22,14 +22,16 @@ function App() {
 						</Link>
 					</header>
 					<NavBar />
-					<Routes>
-						<Route path="/" element={<HomePage />} />
-						<Route path="/categories" element={<Categories />} />
-						<Route path="/reviews" element={<Reviews />} />
-						<Route path="/review/:review_id" element={<ReviewById />} />
-						<Route path="/users" element={<Users />} />
-						<Route path="/users/:username" element={<UserById />} />
-					</Routes>
+					<div className="main_body">
+						<Routes>
+							<Route path="/" element={<HomePage />} />
+							<Route path="/categories" element={<Categories />} />
+							<Route path="/reviews" element={<Reviews />} />
+							<Route path="/review/:review_id" element={<ReviewById />} />
+							<Route path="/users" element={<Users />} />
+							<Route path="/users/:username" element={<UserById />} />
+						</Routes>
+					</div>
 				</BrowserRouter>
 			</div>
 		</CategoriesContext.Provider>
