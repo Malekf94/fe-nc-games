@@ -33,3 +33,11 @@ exports.patchReviewById = (Id, data) => {
 		return data.json();
 	});
 };
+
+exports.getCommentsById = (Id) => {
+	return fetch(
+		`https://my-games-project.herokuapp.com/api/reviews/${Id}/comments`
+	).then((data) => {
+		return data.json();
+	});
+};

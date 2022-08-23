@@ -1,17 +1,25 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getReviewById, patchReviewById } from "../api";
+import { getCommentsById, getReviewById, patchReviewById } from "../api";
 
 export default function GetReviewById() {
 	const { review_id } = useParams();
 	const [review, setReview] = useState("");
 	const [votes, setVotes] = useState("");
+	const [comments, setComments] = useState([]);
+	const [isShown, setIsShown] = useState("hidden");
 
 	useEffect(() => {
-		getReviewById(review_id).then((data) => {
-			setReview(data.review);
-			setVotes(data.review.votes);
-		});
+		getReviewById(review_id)
+			.then((data) => {
+				setReview(data.review);
+				setVotes(data.review.votes);
+			})
+			.then(() => {
+				getCommentsById(review_id).then((data) => {
+					setComments(data.comments);
+				});
+			});
 	}, []);
 
 	const incrementVote = () => {
@@ -27,8 +35,6 @@ export default function GetReviewById() {
 		}).then((updatedVote) => {});
 		setVotes(votes - 1);
 	};
-
-	// useEffect(() => {}, [votes]);
 
 	return (
 		<div className="body">
@@ -52,6 +58,25 @@ export default function GetReviewById() {
 					</section>
 					<p>Comments: {review.comment_count}</p>
 				</li>
+			</ul>
+			<button
+				onClick={() => {
+					isShown === "hidden" ? setIsShown("") : setIsShown("hidden");
+				}}
+			>
+				Show Comments
+			</button>
+			<ul className={isShown}>
+				{comments.map((comment) => {
+					return (
+						<li className="individual_Review" key={comment.comment_id}>
+							<p>Author: {comment.author}</p>
+							<p>Comment: {comment.body}</p>
+							<p>Posted at : {comment.created_at}</p>
+							<p>Number of Votes: {comment.votes}</p>
+						</li>
+					);
+				})}
 			</ul>
 		</div>
 	);
