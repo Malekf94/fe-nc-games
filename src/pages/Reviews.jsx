@@ -1,10 +1,12 @@
 import React from "react";
+import GetReviews from "../components/GetReviews";
+import styles from "./cssPages/Reviews.module.css";
+
 export default function Reviews() {
 	return (
-		<div>
-			<h1>Why isnt this working</h1>
-
-			<p>Reviews</p>
+		<div className={styles.body}>
+			<h1>Reviews</h1>
+			<GetReviews />
 		</div>
 	);
 }
