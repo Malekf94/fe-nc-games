@@ -1,16 +1,34 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getReviewById } from "../api";
+import { getReviewById, patchReviewById } from "../api";
 
 export default function GetReviewById() {
 	const { review_id } = useParams();
 	const [review, setReview] = useState("");
+	const [votes, setVotes] = useState("");
 
 	useEffect(() => {
 		getReviewById(review_id).then((data) => {
 			setReview(data.review);
+			setVotes(data.review.votes);
 		});
 	}, []);
+
+	const incrementVote = () => {
+		patchReviewById(review_id, {
+			inc_votes: 1,
+		}).then((updatedVote) => {});
+		setVotes(votes + 1);
+	};
+
+	const decreaseVote = () => {
+		patchReviewById(review_id, {
+			inc_votes: -1,
+		}).then((updatedVote) => {});
+		setVotes(votes - 1);
+	};
+
+	// useEffect(() => {}, [votes]);
 
 	return (
 		<div className="body">
@@ -27,7 +45,11 @@ export default function GetReviewById() {
 					<p>Author: {review.owner}</p>
 					<p>Designer: {review.designer}</p>
 					{<p>{review.created_at}</p>}
-					<p>Number of votes: {review.votes}</p>
+					<section>
+						<button onClick={() => incrementVote()}>UpVote</button>
+						Number of votes: {votes}
+						<button onClick={() => decreaseVote()}>Downvote</button>
+					</section>
 					<p>Comments: {review.comment_count}</p>
 				</li>
 			</ul>

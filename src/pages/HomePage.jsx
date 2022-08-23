@@ -1,14 +1,6 @@
-import React, { useContext, useEffect } from "react";
-import { CategoriesContext } from "../contexts/CatergoriesContext";
-import { getCategories } from "../api";
+import React from "react";
 
 export default function HomePage() {
-	const { setCategories } = useContext(CategoriesContext);
-	useEffect(() => {
-		getCategories().then((data) => {
-			setCategories(data.categories);
-		});
-	}, []);
 	return (
 		<div>
 			<h1>Random Home page</h1>

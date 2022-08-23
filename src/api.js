@@ -21,3 +21,15 @@ exports.getReviewById = (Id) => {
 		}
 	);
 };
+
+exports.patchReviewById = (Id, data) => {
+	return fetch(`https://my-games-project.herokuapp.com/api/reviews/${Id}`, {
+		method: "PATCH",
+		body: JSON.stringify(data),
+		headers: {
+			"Content-type": "application/json; charset=UTF-8",
+		},
+	}).then((data) => {
+		return data.json();
+	});
+};

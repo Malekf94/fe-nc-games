@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { getReviews } from "../api";
+import { getCategories, getReviews } from "../api";
 import { CategoriesContext } from "../contexts/CatergoriesContext";
 // import styles from "../pages/cssPages/Reviews.module.css";
 import { useNavigate } from "react-router-dom";
@@ -7,12 +7,17 @@ import { useNavigate } from "react-router-dom";
 export default function GetReviews() {
 	const [reviews, setReviews] = useState([]);
 	const [queries, setQueries] = useState([]);
-	const { categories } = useContext(CategoriesContext);
 	const [catQuery, setCatQuery] = useState("");
 	// const [sortQuery, setSortQuery] = useState("");
 	// const [orderQuery, setOrderQuery] = useState("");
 	const [isShown, setIsShown] = useState("hidden");
 	const navigate = useNavigate();
+	const { categories, setCategories } = useContext(CategoriesContext);
+	useEffect(() => {
+		getCategories().then((data) => {
+			setCategories(data.categories);
+		});
+	}, []);
 
 	useEffect(() => {
 		getReviews(queries).then((data) => {
