@@ -7,7 +7,7 @@ export default function GetReviewById() {
 	const [review, setReview] = useState("");
 	const [votes, setVotes] = useState("");
 	const [comments, setComments] = useState([]);
-	const [isShown, setIsShown] = useState("hidden");
+	const [isShown, setIsShown] = useState(["hidden", "Show Comments"]);
 
 	useEffect(() => {
 		getReviewById(review_id)
@@ -17,7 +17,10 @@ export default function GetReviewById() {
 			})
 			.then(() => {
 				getCommentsById(review_id).then((data) => {
-					setComments(data.comments);
+					if (data.msg === "No comment related") {
+					} else {
+						setComments(data.comments);
+					}
 				});
 			});
 	}, []);
@@ -61,12 +64,14 @@ export default function GetReviewById() {
 			</ul>
 			<button
 				onClick={() => {
-					isShown === "hidden" ? setIsShown("") : setIsShown("hidden");
+					isShown[0] === "hidden"
+						? setIsShown(["show", "Scroll down to see comments"])
+						: setIsShown(["hidden", "Show Comments"]);
 				}}
 			>
-				Show Comments
+				{isShown[1]}
 			</button>
-			<ul className={isShown}>
+			<ul className={isShown[0]}>
 				{comments.map((comment) => {
 					return (
 						<li className="individual_Review" key={comment.comment_id}>
