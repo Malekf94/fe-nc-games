@@ -8,9 +8,9 @@ export default function GetReviews() {
 	const [reviews, setReviews] = useState([]);
 	const [queries, setQueries] = useState([]);
 	const [catQuery, setCatQuery] = useState("");
-	// const [sortQuery, setSortQuery] = useState("");
-	// const [orderQuery, setOrderQuery] = useState("");
-	const [isShown, setIsShown] = useState("hidden");
+	const [sortQuery, setSortQuery] = useState("");
+	const [orderQuery, setOrderQuery] = useState("");
+	const [isShown, setIsShown] = useState(styles.hidden);
 	const navigate = useNavigate();
 	const { categories, setCategories } = useContext(CategoriesContext);
 	useEffect(() => {
@@ -18,7 +18,7 @@ export default function GetReviews() {
 			setCategories(data.categories);
 		});
 	}, []);
-
+	const sortables = ["date", "comment count", "votes"];
 	useEffect(() => {
 		getReviews(queries).then((data) => {
 			setReviews(data.reviews);
@@ -30,17 +30,48 @@ export default function GetReviews() {
 		if (catQuery !== "") {
 			queryLine += `category=${catQuery}`;
 		}
+		if (sortQuery !== "" && catQuery === "") {
+			queryLine += `sort_by=${sortQuery}`;
+		} else if (sortQuery !== "" && catQuery !== "") {
+			queryLine += `&&sort_by=${sortQuery}`;
+		}
+		if (orderQuery !== "" && queryLine !== "?") {
+			queryLine += `&&order=${orderQuery}`;
+		} else if (sortQuery !== "" && queryLine == "?") {
+			queryLine += `sort_by=${sortQuery}`;
+		}
+
 		setQueries(queryLine);
 		navigate(`/reviews${queryLine}`);
-	}, [catQuery]);
+	}, [catQuery, sortQuery, orderQuery]);
 
+	const sortingSetter = (sortable) => {
+		if (sortable === "date") {
+			setSortQuery("created_at");
+		} else if (sortable === "comment count") {
+			setSortQuery("comment_count");
+		} else if (sortable === "votes") {
+			setSortQuery("votes");
+		} else {
+			setSortQuery("");
+		}
+	};
+
+	const resetFilters = () => {
+		setCatQuery("");
+		setOrderQuery("");
+		setSortQuery("");
+	};
 	return (
 		<div className={styles.body}>
 			<section>
+				<h3>Click on filters to preview options:</h3>
 				<button
 					className={styles.sortButton}
 					onClick={() => {
-						isShown === "hidden" ? setIsShown("") : setIsShown("hidden");
+						isShown === styles.hidden
+							? setIsShown("")
+							: setIsShown(styles.hidden);
 					}}
 				>
 					Category
@@ -50,7 +81,6 @@ export default function GetReviews() {
 						return (
 							<button
 								onClick={() => setCatQuery(category.slug)}
-								// className="individual_Review"
 								key={category.slug}
 							>
 								{category.slug}
@@ -58,9 +88,35 @@ export default function GetReviews() {
 						);
 					})}
 				</ul>
+				<button
+					className={styles.sortButton}
+					onClick={() => {
+						isShown === styles.hidden
+							? setIsShown("")
+							: setIsShown(styles.hidden);
+					}}
+				>
+					Sort by
+				</button>
+				<ul className={isShown}>
+					{sortables.map((sortable) => {
+						return (
+							<button onClick={() => sortingSetter(sortable)} key={sortable}>
+								{sortable}
+							</button>
+						);
+					})}
+				</ul>
+				<button
+					className={styles.sortButton}
+					onClick={() => {
+						orderQuery === "" ? setOrderQuery("asc") : setOrderQuery("");
+					}}
+				>
+					Order By
+				</button>
+				<button onClick={() => resetFilters()}>Reset Filters</button>
 			</section>
-			<button className={styles.sortButton}>Sort by</button>
-			<button className={styles.sortButton}>Order By</button>
 			<ul>
 				{reviews.map((review) => {
 					return (
