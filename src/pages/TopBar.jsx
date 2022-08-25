@@ -14,9 +14,7 @@ export default function TopBar() {
 
 	return (
 		<header className="App-header">
-			<a className={styles.topHeader} href="/">
-				Welcome to the NC Games
-			</a>
+			<h1 className={styles.topHeader}>Welcome to the NC Games</h1>
 			<div className={styles.topBarLogIn}>{logInStatement}</div>
 		</header>
 	);
