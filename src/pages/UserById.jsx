@@ -1,9 +1,9 @@
+import { useContext } from "react";
+import UserCard from "../components/UserCard";
+import { LoggedInUserContext } from "../contexts/LoggedInUserContext";
+
 export default function UserById() {
-	return (
-		<div>
-			<h1>Why isnt this working</h1>
-			{console.log("hello")}
-			<p>hi</p>Hello
-		</div>
-	);
+	const { loggedInUser } = useContext(LoggedInUserContext);
+	console.log(loggedInUser);
+	return <UserCard user={loggedInUser} />;
 }

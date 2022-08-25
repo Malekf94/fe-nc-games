@@ -1,13 +1,22 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getCommentsById, getReviewById, patchReviewById } from "../api";
+import {
+	addCommentById,
+	getCommentsById,
+	getReviewById,
+	patchReviewById,
+} from "../api";
+import { LoggedInUserContext } from "../contexts/LoggedInUserContext";
+import styles from "../cssPages/Reviews.module.css";
 
 export default function GetReviewById() {
+	const { loggedInUser } = useContext(LoggedInUserContext);
 	const { review_id } = useParams();
 	const [review, setReview] = useState("");
 	const [votes, setVotes] = useState("");
 	const [comments, setComments] = useState([]);
-	const [isShown, setIsShown] = useState(["hidden", "Show Comments"]);
+	const [isShown, setIsShown] = useState([styles.hidden, "Show Comments"]);
+	const [inputBody, setInputBody] = useState("");
 
 	useEffect(() => {
 		getReviewById(review_id)
@@ -23,30 +32,43 @@ export default function GetReviewById() {
 					}
 				});
 			});
-	}, []);
+	}, [comments]);
 
 	const incrementVote = () => {
 		patchReviewById(review_id, {
 			inc_votes: 1,
-		}).then((updatedVote) => {});
+		}).then(() => {});
 		setVotes(votes + 1);
 	};
 
 	const decreaseVote = () => {
 		patchReviewById(review_id, {
 			inc_votes: -1,
-		}).then((updatedVote) => {});
+		}).then(() => {});
 		setVotes(votes - 1);
 	};
 
+	const handleSubmit = (e) => {
+		e.preventDefault();
+		const inputtedComment = {
+			username: loggedInUser.username,
+			body: inputBody,
+		};
+		addCommentById(review_id, inputtedComment).then((data) => {
+			setComments([...comments, data.comment]);
+			setInputBody("");
+		});
+	};
+
 	return (
-		<div className="body">
+		<div className={styles.body}>
+			<h1>View the review below for {review.title}</h1>
 			<ul>
-				<li className="individual_Review" key={review.review_id}>
+				<li className={styles.individual_Review} key={review.review_id}>
 					<p>Title: {review.title}</p>
 					<p>The Review: {review.review_body}</p>
 					<img
-						className="review_img"
+						className={styles.review_img}
 						src={review.review_img_url}
 						alt={review.title}
 					/>
@@ -64,9 +86,9 @@ export default function GetReviewById() {
 			</ul>
 			<button
 				onClick={() => {
-					isShown[0] === "hidden"
-						? setIsShown(["show", "Scroll down to see comments"])
-						: setIsShown(["hidden", "Show Comments"]);
+					isShown[0] === styles.hidden
+						? setIsShown([styles.show, "Scroll down to see comments"])
+						: setIsShown([styles.hidden, "Show Comments"]);
 				}}
 			>
 				{isShown[1]}
@@ -74,7 +96,7 @@ export default function GetReviewById() {
 			<ul className={isShown[0]}>
 				{comments.map((comment) => {
 					return (
-						<li className="individual_Review" key={comment.comment_id}>
+						<li className={styles.individual_Review} key={comment.comment_id}>
 							<p>Author: {comment.author}</p>
 							<p>Comment: {comment.body}</p>
 							<p>Posted at : {comment.created_at}</p>
@@ -82,6 +104,19 @@ export default function GetReviewById() {
 						</li>
 					);
 				})}
+				<form onSubmit={(e) => handleSubmit(e)}>
+					<textarea
+						onChange={(e) => {
+							setInputBody(e.target.value);
+						}}
+						value={inputBody}
+						cols="100"
+						rows="10"
+						placeholder="Type Comment Here"
+						name="newComment"
+					></textarea>
+					<input name="Submit Comment" value="Submit Comment" type="submit" />
+				</form>
 			</ul>
 		</div>
 	);

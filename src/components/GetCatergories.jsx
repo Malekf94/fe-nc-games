@@ -2,7 +2,7 @@ import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { getCategories } from "../api";
 import { CategoriesContext } from "../contexts/CatergoriesContext";
-// import styles from "../pages/cssPages/Reviews.module.css";
+import styles from "../cssPages/GetCategories.module.css";
 
 export default function GetCategories() {
 	const { categories, setCategories } = useContext(CategoriesContext);
@@ -21,7 +21,7 @@ export default function GetCategories() {
 					return (
 						<li
 							onClick={() => navigate(`/reviews?category=${category.slug}`)}
-							className="individual_Review"
+							className={styles.individual_Review}
 							key={category.slug}
 						>
 							<p>Category name : {category.slug}</p>

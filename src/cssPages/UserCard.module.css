@@ -1,0 +1,10 @@
+.userCard {
+	background-color: white;
+}
+
+.userAvatar {
+	width: 100px;
+}
+
+@media only screen and (max-width: 600px) {
+}

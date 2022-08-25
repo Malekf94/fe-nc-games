@@ -1,0 +1,25 @@
+.body {
+	background-color: green;
+	text-align: center;
+	margin-left: 40px;
+	margin-right: 10px;
+}
+
+.individual_Review {
+	border: 2px solid black;
+	margin: 15px 0px;
+}
+.review_img {
+	width: 100%;
+}
+
+.hidden {
+	display: none;
+}
+
+@media only screen and (max-width: 600px) {
+	.body {
+		margin-left: 20px;
+		margin-right: 10px;
+	}
+}
