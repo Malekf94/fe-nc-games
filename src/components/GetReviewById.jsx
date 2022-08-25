@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import {
 	addCommentById,
+	deleteCommentById,
 	getCommentsById,
 	getReviewById,
 	patchReviewById,
@@ -17,6 +18,7 @@ export default function GetReviewById() {
 	const [comments, setComments] = useState([]);
 	const [isShown, setIsShown] = useState([styles.hidden, "Show Comments"]);
 	const [inputBody, setInputBody] = useState("");
+	const [disabledButton, setDisabledButton] = useState(false);
 
 	useEffect(() => {
 		getReviewById(review_id)
@@ -27,6 +29,7 @@ export default function GetReviewById() {
 			.then(() => {
 				getCommentsById(review_id).then((data) => {
 					if (data.msg === "No comment related") {
+						setComments([]);
 					} else {
 						setComments(data.comments);
 					}
@@ -60,6 +63,14 @@ export default function GetReviewById() {
 		});
 	};
 
+	const deleteComment = (id) => {
+		setDisabledButton(true);
+		deleteCommentById(id).then((data) => {
+			console.log(data);
+			setDisabledButton(false);
+		});
+	};
+
 	return (
 		<div className={styles.body}>
 			<h1>View the review below for {review.title}</h1>
@@ -75,7 +86,7 @@ export default function GetReviewById() {
 					<p>Category: {review.category}</p>
 					<p>Author: {review.owner}</p>
 					<p>Designer: {review.designer}</p>
-					{<p>{review.created_at}</p>}
+					<p>Posted at: {review.created_at}</p>
 					<section>
 						<button onClick={() => incrementVote()}>UpVote</button>
 						Number of votes: {votes}
@@ -101,6 +112,14 @@ export default function GetReviewById() {
 							<p>Comment: {comment.body}</p>
 							<p>Posted at : {comment.created_at}</p>
 							<p>Number of Votes: {comment.votes}</p>
+							<button
+								disabled={disabledButton}
+								onClick={() => {
+									deleteComment(comment.comment_id);
+								}}
+							>
+								Delete
+							</button>
 						</li>
 					);
 				})}
