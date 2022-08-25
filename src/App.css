@@ -8,9 +8,7 @@
 	overflow: auto;
 	background-color: green;
 	text-align: center;
-	margin-left: 40px;
-	margin-right: 10px;
-	margin-top: 38px;
+	margin-top: 85px;
 }
 
 .App-header {
@@ -29,28 +27,6 @@
 	margin-right: 0;
 }
 
-.NavBarC {
-	height: 100%;
-	position: fixed;
-	z-index: 1;
-	top: 0;
-	left: 0;
-	background-color: #014404;
-	transition: 0.5s ease;
-	overflow-x: hidden;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-}
-
-.NavBarLinks:visited,
-.NavBarLinks:active {
-	/* background-color: #f44336; */
-	color: white;
-	margin-top: 100px;
-	padding-top: 50px;
-}
-
 .body {
 	display: block;
 	overflow: auto;
@@ -61,16 +37,5 @@
 	margin-top: 38px;
 }
 
-.individual_Review {
-	border: 2px solid black;
-	margin: 15px 0px;
-}
-.review_img {
-	width: 100%;
-}
-
-.hidden {
-	display: none;
-}
 @media only screen and (max-width: 600px) {
 }

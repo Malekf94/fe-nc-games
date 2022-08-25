@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
 import { getCategories, getReviews } from "../api";
 import { CategoriesContext } from "../contexts/CatergoriesContext";
-// import styles from "../pages/cssPages/Reviews.module.css";
 import { useNavigate } from "react-router-dom";
+import styles from "../cssPages/Reviews.module.css";
 
 export default function GetReviews() {
 	const [reviews, setReviews] = useState([]);
@@ -35,9 +35,10 @@ export default function GetReviews() {
 	}, [catQuery]);
 
 	return (
-		<div className="body">
+		<div className={styles.body}>
 			<section>
 				<button
+					className={styles.sortButton}
 					onClick={() => {
 						isShown === "hidden" ? setIsShown("") : setIsShown("hidden");
 					}}
@@ -58,20 +59,20 @@ export default function GetReviews() {
 					})}
 				</ul>
 			</section>
-			<button>Sort by</button>
-			<button>Order By</button>
+			<button className={styles.sortButton}>Sort by</button>
+			<button className={styles.sortButton}>Order By</button>
 			<ul>
 				{reviews.map((review) => {
 					return (
 						<li
 							onClick={() => navigate(`/reviews/${review.review_id}`)}
-							className="individual_Review"
+							className={styles.individual_Review}
 							key={review.review_id}
 						>
 							<p>Title: {review.title}</p>
 							<p>The Review: {review.review_body}</p>
 							<img
-								className="review_img"
+								className={styles.review_img}
 								src={review.review_img_url}
 								alt={review.title}
 							/>

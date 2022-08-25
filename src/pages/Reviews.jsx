@@ -1,6 +1,6 @@
 import React from "react";
 import GetReviews from "../components/GetReviews";
-import styles from "./cssPages/Reviews.module.css";
+import styles from "../cssPages/Reviews.module.css";
 
 export default function Reviews() {
 	return (

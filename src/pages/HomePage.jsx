@@ -1,10 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
+import { LoggedInUserContext } from "../contexts/LoggedInUserContext";
 
 export default function HomePage() {
+	const { loggedInUser } = useContext(LoggedInUserContext);
 	return (
 		<div>
-			<h1>Random Home page</h1>
-			<p>I'll put a proper welcome here next time...</p>
+			<h1>Home page</h1>
+			<p>You are logged in as {loggedInUser.username}</p>
+			<p>
+				Feel free to use the links on the navigation bar on the left hand side
+				of the screen to navigate through the website!!!
+			</p>
 		</div>
 	);
 }

@@ -1,0 +1,25 @@
+.NavBarC {
+	height: 100%;
+	position: fixed;
+	z-index: 1;
+	top: 0;
+	left: 0;
+	background-color: #014404;
+	transition: 0.5s ease;
+	overflow-x: hidden;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+a:visited,
+a:active,
+a:link,
+a:hover {
+	background-color: #f44336;
+	color: white;
+	margin-top: 50px;
+}
+
+@media only screen and (max-width: 600px) {
+}

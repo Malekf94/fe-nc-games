@@ -1,0 +1,15 @@
+.topBarLogIn {
+	float: right;
+}
+.topHeader {
+	margin: 0 150px;
+}
+
+a:visited,
+a:active,
+a:link,
+a:hover {
+	background-color: #f44336;
+	color: white;
+	/* margin-top: 50px; */
+}
