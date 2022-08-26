@@ -15,7 +15,7 @@ export default function GetUsers() {
 			{users.map((user) => {
 				return (
 					<li key={user.username}>
-						<UserCard user={user} />
+						<UserCard userbyname={user} />
 					</li>
 				);
 			})}
