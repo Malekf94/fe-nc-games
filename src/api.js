@@ -66,3 +66,11 @@ exports.addCommentById = (Id, inputComment) => {
 		})
 		.catch(console.log);
 };
+
+exports.deleteCommentById = (Id) => {
+	return fetch(`https://my-games-project.herokuapp.com/api/comments/${Id}`, {
+		method: "DELETE",
+	}).then(() => {
+		return "Comment deleted";
+	});
+};
