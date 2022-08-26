@@ -13,6 +13,7 @@ export default function GetReviews() {
 	const [isShown, setIsShown] = useState(styles.hidden);
 	const navigate = useNavigate();
 	const { categories, setCategories } = useContext(CategoriesContext);
+
 	useEffect(() => {
 		getCategories().then((data) => {
 			setCategories(data.categories);

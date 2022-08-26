@@ -1,7 +1,7 @@
 .NavBarC {
 	height: 100%;
 	position: fixed;
-	z-index: 1;
+	z-index: 1000;
 	top: 0;
 	left: 0;
 	background-color: #014404;
@@ -10,6 +10,7 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	padding-right: 15px;
 }
 
 a:visited,
@@ -18,7 +19,10 @@ a:link,
 a:hover {
 	background-color: #f44336;
 	color: white;
-	margin-top: 50px;
+	margin-top: 150px;
+	margin-left: 10px;
+	border: greenyellow;
+	border-radius: 80%;
 }
 
 @media only screen and (max-width: 600px) {

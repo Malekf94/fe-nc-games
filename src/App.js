@@ -11,6 +11,7 @@ import { CategoriesContext } from "./contexts/CatergoriesContext.jsx";
 import { useState } from "react";
 import TopBar from "./pages/TopBar";
 import { LoggedInUserContext } from "./contexts/LoggedInUserContext";
+import ErrorPage from "./pages/ErrorPage";
 
 function App() {
 	const [categories, setCategories] = useState([]);
@@ -35,6 +36,7 @@ function App() {
 								<Route path="/reviews/:review_id" element={<ReviewById />} />
 								<Route path="/users" element={<Users />} />
 								<Route path="/users/:username" element={<UserById />} />
+								<Route path="*" element={<ErrorPage />} />
 							</Routes>
 						</div>
 					</BrowserRouter>
