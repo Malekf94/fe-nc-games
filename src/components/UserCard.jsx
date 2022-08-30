@@ -39,6 +39,7 @@ export default function UserCard({ userbyname }) {
 				});
 		}
 	}, [username, userbyname]);
+
 	return (
 		<section>
 			{!!error ? (
@@ -46,8 +47,8 @@ export default function UserCard({ userbyname }) {
 				<ErrorPage prop={error} />
 			) : (
 				<div className={styles.userCard} key={user.username}>
-					<h3>UserName: {user.username}</h3>
-					<h3>Name: {user.name}</h3>
+					<h3>UserName:</h3> <p>{user.username}</p>
+					<h3>Name:</h3> <p>{user.name}</p>
 					<img
 						onClick={() => {
 							setLoggedInUser(user);

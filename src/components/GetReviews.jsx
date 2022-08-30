@@ -18,7 +18,7 @@ export default function GetReviews() {
 		getCategories().then((data) => {
 			setCategories(data.categories);
 		});
-	}, []);
+	}, [setCategories]);
 	const sortables = ["date", "comment count", "votes"];
 	useEffect(() => {
 		getReviews(queries).then((data) => {
@@ -44,7 +44,7 @@ export default function GetReviews() {
 
 		setQueries(queryLine);
 		navigate(`/reviews${queryLine}`);
-	}, [catQuery, sortQuery, orderQuery]);
+	}, [catQuery, sortQuery, orderQuery, navigate]);
 
 	const sortingSetter = (sortable) => {
 		if (sortable === "date") {

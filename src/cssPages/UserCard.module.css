@@ -1,5 +1,7 @@
 .userCard {
 	background-attachment: fixed;
+	border: 1px solid;
+	margin: 15px;
 }
 
 .userAvatar {
