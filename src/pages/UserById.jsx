@@ -5,5 +5,10 @@ import UserCard from "../components/UserCard";
 
 export default function UserById() {
 	const { username } = useParams();
-	return <UserCard userbyname={username} />;
+	return (
+		<section>
+			{username}'s userCard
+			<UserCard userbyname={username} />
+		</section>
+	);
 }

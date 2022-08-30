@@ -1,9 +1,10 @@
 .userCard {
-	background-color: white;
+	background-attachment: fixed;
 }
 
 .userAvatar {
 	width: 100px;
+	opacity: 0.5;
 }
 
 @media only screen and (max-width: 600px) {

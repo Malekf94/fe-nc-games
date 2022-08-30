@@ -13,7 +13,7 @@ export default function ErrorPage({ prop = "invalid page" }) {
 	return (
 		<div>
 			<h1>ERROR!!!</h1>
-			<p>{error}</p>
+			<h3>{error}</h3>
 			<button
 				onClick={() => {
 					navigate(-1);

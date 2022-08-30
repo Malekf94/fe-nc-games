@@ -38,7 +38,7 @@ export default function GetReviews() {
 		}
 		if (orderQuery !== "" && queryLine !== "?") {
 			queryLine += `&&order=${orderQuery}`;
-		} else if (sortQuery !== "" && queryLine == "?") {
+		} else if (sortQuery !== "" && queryLine === "?") {
 			queryLine += `sort_by=${sortQuery}`;
 		}
 
@@ -81,6 +81,7 @@ export default function GetReviews() {
 					{categories.map((category) => {
 						return (
 							<button
+								className={styles.sorteeButtons}
 								onClick={() => setCatQuery(category.slug)}
 								key={category.slug}
 							>
@@ -102,7 +103,11 @@ export default function GetReviews() {
 				<ul className={isShown}>
 					{sortables.map((sortable) => {
 						return (
-							<button onClick={() => sortingSetter(sortable)} key={sortable}>
+							<button
+								className={styles.sorteeButtons}
+								onClick={() => sortingSetter(sortable)}
+								key={sortable}
+							>
 								{sortable}
 							</button>
 						);
@@ -118,6 +123,7 @@ export default function GetReviews() {
 				</button>
 				<button onClick={() => resetFilters()}>Reset Filters</button>
 			</section>
+
 			<ul>
 				{reviews.map((review) => {
 					return (
@@ -126,19 +132,26 @@ export default function GetReviews() {
 							className={styles.individual_Review}
 							key={review.review_id}
 						>
-							<p>Title: {review.title}</p>
-							<p>The Review: {review.review_body}</p>
+							<h3>Title: </h3>
+							<section className="p">{review.title}</section>
+							<h3>The Review: </h3>
+							<section className="p">{review.review_body}</section>
 							<img
 								className={styles.review_img}
 								src={review.review_img_url}
 								alt={review.title}
 							/>
-							<p>Category: {review.category}</p>
-							<p>Author: {review.owner}</p>
-							<p>Designer: {review.designer}</p>
-							{/* <p>{review.created_at}</p> */}
-							<p>Number of votes: {review.votes}</p>
-							<p>Comments: {review.comment_count}</p>
+							<h3>Category:</h3>{" "}
+							<section className="p">{review.category}</section>
+							<h3>Author: </h3>
+							<section className="p">{review.owner}</section>
+							<h3>Designer: </h3>
+							<section className="p">{review.designer}</section>
+							{/* <h3>{review.created_at}</h3> */}
+							<h3>Number of votes: </h3>
+							<section className="p">{review.votes}</section>
+							<h3>Comments: </h3>
+							<section className="p">{review.comment_count}</section>
 						</li>
 					);
 				})}

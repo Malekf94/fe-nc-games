@@ -113,30 +113,39 @@ export default function GetReviewById() {
 	return (
 		<div className={styles.body}>
 			{!!error ? (
-				// <p>{error}</p>
+				// <h3>{error}</h3>
 				<ErrorPage prop={error} />
 			) : (
 				<div>
 					<h1>View the review below for {review.title}</h1>
 					<ul>
 						<li className={styles.individual_Review} key={review.review_id}>
-							<p>Title: {review.title}</p>
-							<p>The Review: {review.review_body}</p>
+							<h3>Title: </h3>
+							<section className="p">{review.title}</section>
+							<h3>The Review: </h3>
+							<section className="p">{review.review_body}</section>
 							<img
 								className={styles.review_img}
 								src={review.review_img_url}
 								alt={review.title}
 							/>
-							<p>Category: {review.category}</p>
-							<p>Author: {review.owner}</p>
-							<p>Designer: {review.designer}</p>
-							<p>Posted at: {review.created_at}</p>
+							<h3>Category:</h3>{" "}
+							<section className="p">{review.category}</section>
+							<h3>Author: </h3>
+							<section className="p">{review.owner}</section>
+							<h3>Designer: </h3>
+							<section className="p">{review.designer}</section>
+							<h3>Posted at:</h3>{" "}
+							<section className="p">{review.created_at}</section>
 							<section>
 								<button onClick={() => changeVote(1)}>UpVote</button>
-								Number of votes: {votes}
+								<section className="p">
+									<h3>Number of votes:</h3>
+									{votes}
+								</section>
 								<button onClick={() => changeVote(-1)}>Downvote</button>
 							</section>
-							<p>Comments: {review.comment_count + numOfComments}</p>
+							<h3>Comments: {review.comment_count + numOfComments}</h3>
 						</li>
 					</ul>
 					<button
@@ -155,10 +164,14 @@ export default function GetReviewById() {
 									className={styles.individual_Review}
 									key={comment.comment_id}
 								>
-									<p>Author: {comment.author}</p>
-									<p>Comment: {comment.body}</p>
-									<p>Posted at : {comment.created_at}</p>
-									<p>Number of Votes: {comment.votes}</p>
+									<h3>Author:</h3>{" "}
+									<section className="p">{comment.author}</section>
+									<h3>Comment: </h3>
+									<section className="p">{comment.body}</section>
+									<h3>Posted at : </h3>
+									<section className="p">{comment.created_at}</section>
+									<h3>Number of Votes:</h3>{" "}
+									<section className="p">{comment.votes}</section>
 									<button
 										disabled={disabledButton}
 										onClick={() => {

@@ -7,12 +7,10 @@ import ErrorPage from "../pages/ErrorPage";
 
 export default function UserCard({ userbyname }) {
 	const { username } = useParams();
-	const { loggedInUser, setLoggedInUser } = useContext(LoggedInUserContext);
+	const { setLoggedInUser } = useContext(LoggedInUserContext);
 	const navigate = useNavigate();
 	const [user, setUser] = useState([]);
 	const [error, setError] = useState(null);
-	console.log(username);
-	console.log(typeof userbyname);
 
 	useEffect(() => {
 		if (userbyname !== undefined && typeof userbyname !== "string") {
@@ -28,7 +26,6 @@ export default function UserCard({ userbyname }) {
 					}
 				});
 		} else {
-			console.log("yo");
 			getUser(username)
 				.then(({ userData }) => {
 					setUser(userData);
@@ -45,12 +42,12 @@ export default function UserCard({ userbyname }) {
 	return (
 		<section>
 			{!!error ? (
-				// <p>{error}</p>
+				// <h3>{error}</h3>
 				<ErrorPage prop={error} />
 			) : (
 				<div className={styles.userCard} key={user.username}>
-					<p>UserName: {user.username}</p>
-					<p>Name: {user.name}</p>
+					<h3>UserName: {user.username}</h3>
+					<h3>Name: {user.name}</h3>
 					<img
 						onClick={() => {
 							setLoggedInUser(user);

@@ -1,8 +1,6 @@
 .body {
-	background-color: green;
 	text-align: center;
-	margin-left: 40px;
-	margin-right: 10px;
+	margin-right: 5px;
 }
 
 .individual_Review {
@@ -13,13 +11,28 @@
 	width: 100%;
 }
 
+.sortButton {
+	size: 5px;
+	background-color: green;
+	border: 2px blue solid;
+}
+
+.sorteeButtons {
+	size: 5px;
+	background-color: blue;
+	border: 2px green solid;
+	color: yellow;
+}
+
 .hidden {
 	display: none;
 }
 
+.p {
+	display: inline-block;
+}
+
 @media only screen and (max-width: 600px) {
 	.body {
-		margin-left: 20px;
-		margin-right: 10px;
 	}
 }

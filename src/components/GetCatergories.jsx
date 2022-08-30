@@ -24,9 +24,14 @@ export default function GetCategories() {
 							className={styles.individual_Review}
 							key={category.slug}
 						>
-							<p>Category name : {category.slug}</p>
+							<section>
+								<h3>Category name :</h3> {category.slug}
+							</section>
 
-							<p>Category Description : {category.description}</p>
+							<section>
+								<h3>Category Description : </h3>
+								{category.description}
+							</section>
 						</li>
 					);
 				})}
